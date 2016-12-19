@@ -1,0 +1,113 @@
+{
+  "type": "force",
+  "categories": [
+    {
+      "name": "A",
+      "keyword": {},
+      "base": "HTMLElement"
+
+    },
+    {
+        "name": "B",
+        "keyword": {},
+        "base": "WebGLRenderingContext"
+    },
+    {
+        "name": "C",
+        "keyword": {},
+        "base": "SVGElement"
+    },
+    {
+        "name": "D",
+        "keyword": {},
+        "base": "CSSRule"
+    }
+  ],
+  "nodes": [
+        {
+            "name": "A1",
+            "value": 1,
+            "category": 0
+        },
+        {
+            "name": "A2",
+            "value": 1,
+            "category": 0
+        },
+        {
+            "name": "A3",
+            "value": 1,
+            "category": 0
+        },
+        {
+            "name": "B1",
+            "value": 1,
+            "category": 1
+        },
+        {
+            "name": "B2",
+            "value": 1,
+            "category": 1
+        },
+        {
+            "name": "B3",
+            "value": 1,
+            "category": 1
+        },
+        {
+            "name": "C1",
+            "value": 1,
+            "category": 2
+        },
+        {
+            "name": "C2",
+            "value": 1,
+            "category": 2
+        },
+        {
+            "name": "D1",
+            "value": 1,
+            "category": 3
+        },
+        {
+            "name": "D2",
+            "value": 1,
+            "category": 3
+        },
+        {
+            "name": "D3",
+            "value": 1,
+            "category": 3
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1
+        },
+      {
+            "source": 0,
+            "target": 2
+        },
+        {
+            "source": 0,
+            "target": 3
+        },
+        {
+            "source": 3,
+            "target": 4
+        },
+        {
+            "source": 3,
+            "target": 5
+        },
+        {
+            "source": 6,
+            "target": 7
+        },
+        {
+            "source": 7,
+            "target": 8
+        }
+    ]
+}

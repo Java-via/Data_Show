@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}
+    嗅·报告
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .div_file{
+            position: relative;
+            height:150px;
+            background-image:url('/static/img/pdf.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain
+        }
+        .p_file{
+            position: relative;
+            left: 25px;
+            top: 50px;
+            font-size: 14px;
+            color: #285e8e
+        }
+    </style>
+    <script>
+        function hover(div_main, div_hover) {
+            div_main.hover(function () {
+                div_hover.show();
+            }, function () {
+                div_hover.hide();
+            });
+        }
+        
+        function btn_skip(btn_read, btn_download, name) {
+            btn_read.click(function () {
+{#                $("#frame_read_online")#}
+                $("#div_file_list").hide();
+                $("#frame_read_online").attr("src", "http://127.0.0.1:5000/static/pdfjs/web/viewer.html?file=\\static\\doc\\" + name);
+                $("#div_read_online").show();
+            });
+            btn_download.click(function () {
+                location.href = "/reports/download/" + name;
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 div_head_style">
+                <div class="header">
+                    <ul class="nav nav-pills pull-right" role="tablist">
+                        <li role="presentation"><a href="./movies">嗅·电影</a></li>
+                        <li role="presentation"><a href="./musics">嗅·音乐</a></li>
+                        <li role="presentation"><a href="./apps">嗅·应用</a></li>
+                        <li role="presentation" class="active"><a href="./reports">嗅·报告</a></li>
+                    </ul>
+                    <h3 class="text-muted">DataShow</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="div_file_list" style="padding-top:5%"></div>
+        <div id="div_read_online" class="col-lg-9 col-lg-offset-2" style="height: 595px; display: none">
+                <iframe id="frame_read_online" class="frame_style" style="height: 100%; width: 100%">
+                </iframe>
+        </div>
+    </div>
+    <script>
+    $(function(){
+        $.ajax({
+            url: "/api/getfiles",
+            dataType : "json",
+            type : "GET", //请求方式
+            beforeSend : function() {
+                //请求前的处理
+            },
+            success : function(data) {
+                if(data.result == 1){
+                    var filenames = data.data;
+                    var file_count = filenames.length;
+                    if(file_count == 0) {
+                        str_div = "<div class='col-lg-2 col-sm-offset-2'>暂无报告。。。</div>";
+                        $("#div_file_list").append(str_div);
+                    }else{
+                        for(var i=0; i<file_count; i++){
+                            var download_name = filenames[i][0];
+                            var show_name = filenames[i][1];
+                            if(i%3==0){
+                                var str_div = "<div class='col-lg-2 col-sm-offset-2 div_file' id='div_pdf"+ i
+                                        + "'><p class='p_file'>" + show_name + "</p><div id='div_hover" + i +
+                                        "' style='display: none; position: relative; left: 25px; top: 95px;'>" +
+                                        "<button id='btn_read" + i +"' class='btn btn-default' " +
+                                        "style='background-color: #72d0eb'>" +
+                                        "查看</button><button id='btn_download" + i +"' class='btn btn-default' " +
+                                        "style='background-color: #72d0eb'>下载</button></div>" +
+                                        "<script type='application/javascript'> var div_main = $('#div_pdf" + i +"');" +
+                                        "var div_hover = $('#div_hover" + i + "');hover(div_main, div_hover);" +
+                                        "var btn_read = $('#btn_read" + i + "');var btn_download = $('#btn_download" + i +
+                                        "');btn_skip(btn_read, btn_download, '" + download_name + "');\<\/script></div>";
+                                $("#div_file_list").append(str_div);
+                            }else{
+                                var str_div = "<div class='col-lg-2 col-sm-offset-1 div_file' id='div_pdf"+ i
+                                        + "'><p class='p_file'>" + show_name + "</p><div id='div_hover" + i +
+                                        "' style='display: none; position: relative; left: 25px; top: 95px;'>" +
+                                        "<button id='btn_read" + i +"' class='btn btn-default' " +
+                                        "style='background-color: #72d0eb'>" +
+                                        "查看</button><button id='btn_download" + i +"' class='btn btn-default' " +
+                                        "style='background-color: #72d0eb'>下载</button></div>" +
+                                        "<script type='application/javascript'> var div_main = $('#div_pdf" + i +"');" +
+                                        "var div_hover = $('#div_hover" + i + "');hover(div_main, div_hover);" +
+                                        "var btn_read = $('#btn_read" + i + "');var btn_download = $('#btn_download" + i +
+                                        "');btn_skip(btn_read, btn_download, '" + download_name + "');\<\/script></div>";
+                                $("#div_file_list").append(str_div);
+                            }
+                        }
+                    }
+                }
+
+            },
+            complete : function() {
+                //请求完成的处理
+            },
+            error : function(err) {
+                //请求出错处理
+                console.log(err);
+            }
+        })
+    })
+    </script>
+{% endblock %}

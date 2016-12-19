@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+    DataShow-数据嗅
+{% endblock %}
+{% block head %}
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/cover.css" rel="stylesheet">
+    <link rel="icon" href="/static/icon.ico">
+{% endblock %}
+{% block body %}
+    {{ super() }}
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">DataShow-数据嗅</h3>
+{#                        <ul class="nav masthead-nav">#}
+{#                            <li class="active"><a href="http://v3.bootcss.com/examples/cover/#">Home</a></li>#}
+{#                            <li><a href="http://v3.bootcss.com/examples/cover/#">Features</a></li>#}
+{#                            <li><a href="http://v3.bootcss.com/examples/cover/#">Contact</a></li>#}
+{#                        </ul>#}
+                    </div>
+                </div>
+
+                <div class="inner cover">
+                    <h1 class="cover-heading">Jessie's Little Show.</h1>
+                    <p class="lead" style="color: gainsboro">HTML + Bootstrap + ECharts + CSS + JQuery + Ajax + Flask + MySQL</p>
+                    <p class="lead">
+                        <a href="./movies" class="btn btn-lg btn-default" style="color: darkgrey">嗅一下</a>
+                    </p>
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Cover template for <a href="http://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

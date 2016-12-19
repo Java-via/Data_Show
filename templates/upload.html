@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    {{ super() }}
+    <link href="/static/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="/static/js/canvas-to-blob.min.js" type="text/javascript"></script>
+    <script src="/static/js/sortable.min.js" type="text/javascript"></script>
+    <script src="/static/js/purify.min.js" type="text/javascript"></script>
+    <script src="/static/js/fileinput.js"></script>
+    <script src="/static/js/zh.js"></script>
+    <script src="/static/js/pt-BR.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="/static/js/LANG.js"></script>
+    <script type="application/javascript">
+        function initFileInput(ctrlName, uploadUrl) {
+            var control = $('#' + ctrlName);
+
+            control.fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: uploadUrl, //上传的地址
+                allowedFileExtensions : ['pdf'],//接收的文件后缀
+                showRemove: false,
+                showZoom: false,
+                showUpload: true, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式
+                previewFileIconSettings: {
+                    'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>'
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block title %}
+    嗅·上传
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    {% for message in get_flashed_messages() %}
+         <div class="alert alert-warning">
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+             {{ message }}
+         </div>
+     {% endfor %}
+    <div class="cover-container">
+        <div class="row">
+            <div class="col-lg-9 col-lg-offset-2 div_head_style">
+                <div class="header">
+                    <ul class="nav nav-pills pull-right" role="tablist">
+                        <li role="presentation" class="active"><a href="./movies">嗅·电影</a></li>
+                        <li role="presentation"><a href="./musics">嗅·音乐</a></li>
+                        <li role="presentation"><a href="./apps">嗅·应用</a></li>
+                        <li role="presentation"><a href="./reports">嗅·报告</a></li>
+                    </ul>
+                    <h3 class="text-muted">DataShow</h3>
+                </div>
+                <div style="width:50%; padding-top: 5%">
+                    <label class="control-label">Select File</label>
+                    <input id="ip_file" name="input_file" type="file" multiple=true class="file-loading">
+                    <script>
+                        $("#ip_file").fileinput({
+                            uploadUrl: "/api/upload", // server upload action
+                            uploadAsync: false,
+                            maxFileCount: 5}
+                        ).on('filebatchpreupload', function(event, data) {
+                            var n = data.files.length, files = n > 1 ? n + ' files' : 'one file';
+                            if (!window.confirm("Are you sure you want to upload " + files + "?")) {
+                                return {
+                                    message: "Upload aborted!", // upload error message
+                                    data:{} // any other data to send that can be referred in `filecustomerror`
+                                };
+                            }
+                        });
+                    </script>
+{#                    <input id="file-Portrait" type="file" class="file" data-preview-file-type="text">#}
+{#                    <script>#}
+{#                        initFileInput("file-Portrait", "/api/upload");#}
+{#                    </script>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{#    {{ wtf.quick_form(form) }}#}
+{% endblock %}

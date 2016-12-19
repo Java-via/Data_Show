@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}
+    嗅·电影
+{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 div_head_style">
+                <div class="header">
+                    <ul class="nav nav-pills pull-right" role="tablist">
+                        <li role="presentation" class="active"><a href="./movies">嗅·电影</a></li>
+                        <li role="presentation"><a href="./musics">嗅·音乐</a></li>
+                        <li role="presentation"><a href="./apps">嗅·应用</a></li>
+                        <li role="presentation"><a href="./reports">嗅·报告</a></li>
+                    </ul>
+                    <h3 class="text-muted">DataShow</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="dv_show">
+            <div class="col-lg-7 col-lg-offset-2" id="dv_level_line" style="width: 750px;height: 400px; margin-top: 30px;">
+                <script type="text/javascript">
+                    var chart_level_line = echarts.init($("#dv_level_line").get(0));
+                    var option = make_line_country();
+                    chart_level_line.setOption(option);
+                </script>
+            </div>
+
+            <div class="col-lg-7 col-lg-offset-2" id="dv_count_map" style="width: 750px;height: 500px; padding-top: 30px">
+                <script type="text/javascript">
+                    var chart_count_map = echarts.init($("#dv_count_map").get(0));
+                    var option = make_map_country();
+                    chart_count_map.setOption(option);
+
+                    chart_count_map.on('click', function (params) {
+                        param_click($('#fade'), $('.theme-popover'), $('#dv_title'), params);
+                    });
+                </script>
+
+                <div class="theme-popover content">
+                    <div style="color: black; font-size: 16px" id="dv_title"></div>
+                    <div id="dv_pie" style="width: 750px;height: 300px;">
+                        <script type="text/javascript">
+{#                            function load_chart(text){#}
+{#                                loadChart($("#dv_pie").get(0), text);#}
+{#                            }#}
+                            function loadChart(text){
+                                var dict_country = {'新西兰': [0, 2, 2, 0, 1], '西班牙': [3, 8, 4, 0, 17], '阿根廷': [1, 2, 0, 0, 5], '瑞典': [0, 2, 5, 0, 7], '美国': [114, 219, 192, 80, 311], '英国': [45, 77, 34, 8, 132], '韩国': [26, 66, 59, 69, 93], '伊朗': [0, 2, 0, 0, 7], '奥地利': [2, 0, 2, 0, 8], '澳大利亚': [2, 2, 3, 0, 16], '巴西': [0, 2, 4, 0, 7], '爱尔兰': [1, 3, 2, 1, 3], '以色列': [0, 1, 0, 1, 4], '波兰': [0, 1, 4, 0, 7], '德国': [7, 17, 13, 0, 43], '法国': [4, 32, 36, 3, 85], '丹麦': [0, 2, 6, 0, 5], '俄罗斯': [0, 2, 0, 3, 10], '比利时': [0, 4, 5, 0, 12], '泰国': [6, 11, 12, 5, 42], '土耳其': [0, 0, 0, 0, 3], '墨西哥': [0, 2, 1, 0, 3], '匈牙利': [0, 0, 1, 0, 4], '荷兰': [0, 1, 3, 0, 8], '意大利': [3, 5, 3, 0, 17], '捷克': [1, 2, 1, 0, 6], '日本': [65, 250, 182, 41, 153], '印度': [0, 8, 10, 3, 25], '加拿大': [4, 9, 10, 5, 24], '中国': [62, 202, 208, 338, 588]};
+                                var chart_pie = echarts.init($("#dv_pie").get(0));
+                                var option = make_pie(text, dict_country);
+                                chart_pie.setOption(option);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div id="fade" class="black_overlay" style="display: none">测试测试测试</div>
+
+            <div class="col-lg-7 col-lg-offset-2" id="dv_high_rate_year" style="width: 750px;height: 400px; margin-top: 30px">
+                <script type="text/javascript">
+                    var chart_high_rate_year = echarts.init($("#dv_high_rate_year").get(0));
+                    var option = make_highrate_line();
+                    chart_high_rate_year.setOption(option);
+                </script>
+            </div>
+
+            <div class="col-lg-7 col-lg-offset-2" id="dv_count_year" style="width: 750px;height: 400px; margin-top: 30px">
+                <script type="text/javascript">
+                    var chart_count_year = echarts.init($("#dv_count_year").get(0));
+                    var option = make_count_world();
+                    chart_count_year.setOption(option);
+                </script>
+            </div>
+
+            <div class="col-lg-7 col-lg-offset-2" id="dv_count_china_year" style="width: 750px;height: 400px; margin-top: 30px">
+                <script type="text/javascript">
+                    var chart_count_china_year = echarts.init($("#dv_count_china_year").get(0));
+                    var option = make_high_count_china();
+                    chart_count_china_year.setOption(option);
+                </script>
+            </div>
+
+            <div class="col-lg-7 col-lg-offset-2" id="dv_count_america_year" style="width: 750px;height: 400px; margin-top: 30px">
+                <script type="text/javascript">
+                    var chart_count_america_year = echarts.init($("#dv_count_america_year").get(0));
+                    var option = make_high_count_america();
+                    chart_count_america_year.setOption(option);
+                </script>
+            </div>
+
+{#            <div class="col-lg-7 col-lg-offset-2" id="dv_count_america_year" style="width: 700px;height: 400px; margin-top: 30px">#}
+{#                <script type="text/javascript">#}
+{#                    var chart_count_america_year = echarts.init($("#dv_count_america_year").get(0));#}
+{#                    var option = make_china_america();#}
+{#                    chart_count_america_year.setOption(option);#}
+{#                </script>#}
+{#            </div>#}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+{% endblock %}

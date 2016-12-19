@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}
+    嗅·音乐
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 div_head_style">
+                <div class="header">
+                    <ul class="nav nav-pills pull-right" role="tablist">
+                        <li role="presentation"><a href="./movies">嗅·电影</a></li>
+                        <li role="presentation"><a href="./musics">嗅·音乐</a></li>
+                        <li role="presentation" class="active"><a href="./apps">嗅·应用</a></li>
+                        <li role="presentation"><a href="./reports">嗅·报告</a></li>
+                    </ul>
+                    <h3 class="text-muted">DataShow</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
